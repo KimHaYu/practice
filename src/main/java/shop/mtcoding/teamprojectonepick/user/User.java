@@ -79,4 +79,7 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public void setPicUrl(String fileName) {
+    }
+
 }
