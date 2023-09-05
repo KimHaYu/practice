@@ -46,26 +46,26 @@ public class User {
     @Column(nullable = false, length = 10000)
     String tel;
 
-    @Column(nullable = true, length = 10000) // 유일하게 유저에게만 들어가는 값
+    @Column(length = 10000) // 유일하게 유저에게만 들어가는 값
     String birth;
 
     // 기업 유저
 
-    @Column(nullable = true, length = 10000)
+    @Column(length = 10000)
     String manageBizname; // 회사명
-
-    @Column(nullable = true, length = 10000)
-    String manageAddress; // 이따 수정페이지에서 필요하다고 생각
 
     private Timestamp createdAt;
 
     // 개인 기업 구분 코드 -> 개인이면 1, 기업이면 2
     @Column(nullable = false)
-    int code;
+    int usercode;
+
+    private String picUrl;
 
     @Builder
     public User(Integer id, String loginId, String password, String username, String email, String address, String tel,
-            String birth, String manageBizname, String manageAddress, Timestamp createdAt) {
+            String birth, String manageBizname, Timestamp createdAt, int usercode,
+            String picUrl) {
         this.id = id;
         this.loginId = loginId;
         this.password = password;
@@ -75,11 +75,9 @@ public class User {
         this.tel = tel;
         this.birth = birth;
         this.manageBizname = manageBizname;
-        this.manageAddress = manageAddress;
         this.createdAt = createdAt;
-    }
-
-    public void setPicUrl(String fileName) {
+        this.usercode = usercode;
+        this.picUrl = picUrl;
     }
 
 }

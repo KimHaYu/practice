@@ -14,8 +14,14 @@ public class UserContoller {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user/update")
+    /*
+     * 1. 사용자가 회원 정보 수정 요청을 보낸다
+     * 2. 컨트롤러가 DTO로 데이터를 받는다.
+     */
+
+    @PostMapping("/userUpdate")
     public String update(UserRequest.UpdateDTO updateDTO) {
+        System.out.println(updateDTO);
         // 1. 회원수정 (서비스)
         // 2. 세션동기화
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -48,9 +54,19 @@ public class UserContoller {
         return ("/user/userProfileForm");
     }
 
+    @GetMapping("/bizProfileForm")
+    public String bizProfileForm() {
+        return "/biz/bizProfileForm";
+    }
+
     @GetMapping("/fixUserProfileForm")
     public String fixUserProfile() {
         return ("/user/fixUserProfileForm");
+    }
+
+    @GetMapping("/fixBizProfileForm")
+    public String fixBizProfileForm() {
+        return "/biz/fixBizProfileForm";
     }
 
     @PostMapping("/userJoin")
@@ -58,5 +74,17 @@ public class UserContoller {
         userService.유저회원가입(joinDTO);
 
         return "/index/loginForm";
+    }
+
+    @PostMapping("/bizUserJoin")
+    public String bizuserJoin(UserRequest.BizJoinDTO bizjoinDTO) {
+        userService.기업유저회원가입(bizjoinDTO);
+
+        return "/index/loginForm";
+    }
+
+    @GetMapping("/bizJoinForm")
+    public String bizJoinForm() {
+        return "/biz/bizJoinForm";
     }
 }
